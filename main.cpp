@@ -15,34 +15,31 @@ private:
 	setter m_setter;
 
 public:
-	// Оператор приведения типа. Реализует свойство для чтения.
 	operator proptype()
 	{
-		// Здесь может быть проверка "m_owner" и "m_getter" на NULL
 		return (m_owner->*m_getter)();
 	}
-	// Оператор присваивания. Реализует свойство для записи.
+	
 	void operator =(proptype data)
 	{
-		// Проверка "m_owner" и "m_setter" на NULL
 		assert(m_owner != NULL && m_setter != NULL);
 		(m_owner->*m_setter)(data);
 	}
-	// Конструктор по умолчанию.
+	
 	property() :
 		m_owner(NULL),
 		m_getter(NULL),
 		m_setter(NULL)
 	{
 	}
-	//Конструктор инициализации.
+	
 	property(propowner * const owner, getter getmethod, setter setmethod) :
 		m_owner(owner),
 		m_getter(getmethod),
 		m_setter(setmethod)
 	{
 	}
-	// Инициализация
+	
 	void init(propowner * const owner, getter getmethod, setter setmethod = NULL)
 	{
 		m_owner = owner;
